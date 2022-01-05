@@ -45,7 +45,7 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        return data;
+        return new ArrayList<>(data);
     }
 
     @Override

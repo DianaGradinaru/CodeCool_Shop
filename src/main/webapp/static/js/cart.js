@@ -1,5 +1,6 @@
 // let button = document.querySelectorAll(".btn-success");
 // let cart = document.querySelector(".bi-cart");
+console.log("intra");
 
 async function updateQuantity() {
     let prodQuantity = this.value;

@@ -6,17 +6,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Cart {
     private static final AtomicInteger count = new AtomicInteger(1);
-    int id;
+    private int id;
     private transient List<LineItem> products = new ArrayList<>();
-    float total;
-    int quantity;
+    private float total;
+    private int quantity;
 
     public Cart(int id) {
         this.id = id;
     }
 
     public Cart(List<LineItem> products, int id) {
-//        this.id = count.incrementAndGet();
         this.id = id;
         this.products = products;
     }
@@ -40,12 +39,12 @@ public class Cart {
 
     public void calculateTotal() {
         total = 0;
-        products.forEach( product -> {
+        products.forEach(product -> {
             total += product.getQuantity() * product.getUnitPrice();
         });
     }
 
-    public void addToCart(LineItem lineItem){
+    public void addToCart(LineItem lineItem) {
         products.add(lineItem);
     }
 
@@ -67,11 +66,11 @@ public class Cart {
         }
     }
 
-    public int getQuantity(){
+    public int getQuantity() {
         return quantity;
     }
 
-    public int getNumberOfProducts(){
+    public int getNumberOfProducts() {
         int nrItems = 0;
         for (LineItem item : products) {
             nrItems += item.getQuantity();
@@ -80,7 +79,7 @@ public class Cart {
     }
 
     public int getQuantityOfProduct(Product product) {
-        for (LineItem item : products ) {
+        for (LineItem item : products) {
             if (item.getProduct().getId() == product.getId()) {
                 return item.getQuantity();
             }
@@ -92,13 +91,13 @@ public class Cart {
         this.quantity = quantity;
     }
 
-    public void increaseQuantity(){
-        quantity +=1;
+    public void increaseQuantity() {
+        quantity += 1;
     }
 
     public void removeProduct(Product product) {
-        for ( LineItem item : products) {
-            if (item.getProduct().getId() == product.getId()){
+        for (LineItem item : products) {
+            if (item.getProduct().getId() == product.getId()) {
                 if (item.getQuantity() > 1) {
                     item.setQuantity(item.getQuantity() - 1);
                 } else {

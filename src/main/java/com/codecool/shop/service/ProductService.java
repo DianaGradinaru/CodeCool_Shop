@@ -38,5 +38,8 @@ public class ProductService{
         return productDao.getBy(supplier);
     }
 
+    public List<Product> getAllProducts() {
+        return productDao.getAll();
+    }
 
 }

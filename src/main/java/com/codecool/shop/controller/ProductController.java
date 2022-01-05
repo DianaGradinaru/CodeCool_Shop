@@ -38,7 +38,7 @@ public class ProductController extends HttpServlet {
     SupplierDao supplierDataStore;
     ProductService productService;
 
-    private void setData(HttpServletRequest req, HttpServletResponse resp){
+    private void setData(HttpServletRequest req, HttpServletResponse resp) {
 
         engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         context = new WebContext(req, resp, req.getServletContext());
@@ -46,7 +46,7 @@ public class ProductController extends HttpServlet {
         productDataStore = ProductDaoMem.getInstance();
         productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         supplierDataStore = SupplierDaoMem.getInstance();
-        productService = new ProductService(productDataStore,productCategoryDataStore, supplierDataStore);
+        productService = new ProductService(productDataStore, productCategoryDataStore, supplierDataStore);
 
         session = req.getSession();
         cart = (Cart) session.getAttribute("cart");
@@ -60,22 +60,18 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         setData(req, resp);
 
-//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-//        ProductService productService = new ProductService(productDataStore,productCategoryDataStore, supplierDataStore);
-
-//        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-//        WebContext context = new WebContext(req, resp, req.getServletContext());
 
         String category = req.getParameter("category");
         int categoryId = (category != null) ? Integer.parseInt(category) : 1;
         String supplier = req.getParameter("supplier");
         int supplierId = (supplier != null) ? Integer.parseInt(supplier) : 0;
 
-        if (supplier == null) {
+        if (supplier == null && category == null) {
+            context.setVariable("products", productService.getAllProducts());
+        } else if (supplier == null) {
             context.setVariable("category", productService.getProductCategory(categoryId));
             context.setVariable("products", productService.getProductsForCategory(categoryId));
-        } else {
+        } else if (category == null) {
             context.setVariable("supplier", productService.getProductSupplier(supplierId));
             context.setVariable("products", productService.getProductsForSupplier(supplierId));
         }
@@ -95,8 +91,6 @@ public class ProductController extends HttpServlet {
         setData(req, resp);
         System.out.println("check");
 
-//        ProductDao productDataStore = ProductDaoMem.getInstance();
-
 
         String productId = req.getParameter("productId");
         int id = Integer.parseInt(productId);
@@ -105,10 +99,6 @@ public class ProductController extends HttpServlet {
         cart.addProduct(product, product.getDefaultPrice());
         session.setAttribute("cart", cart);
 
-//        System.out.println("product" + product);
-//        System.out.println("cart" + cart);
-
-//        engine.process("product/index.html", context, resp.getWriter());
 
         doGet(req, resp);
 
