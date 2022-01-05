@@ -44,7 +44,7 @@
 <div class="container mt-3 mb-5">
     <h1 class="text-center fs-1 fw-bold">Checkout</h1>
 
-    <form class="row g-3">
+    <form class="row g-3" action="/payment">
         <div class="bg-body col col-lg-8 p-3 rounded">
             <h6 class="text fs-4 fw-bold">Billing Address</h6>
             <div class="row">
@@ -78,7 +78,7 @@
             </div>
             <div class="row">
                 <div class="col mt-3 mb-5">
-                    <select class="form-select mt-3" aria-label="Default select example">
+                    <select class="form-select mt-3" aria-label="Default select example" required>
                         <option selected>Country</option>
                         <option value="1">Albania</option>
                         <option value="2">Andorra</option>
@@ -132,7 +132,7 @@
                     </select>
                 </div>
                 <div class="col mt-3">
-                    <select class="form-select mt-3" aria-label="Default select example">
+                    <select class="form-select mt-3" aria-label="Default select example" required>
                         <option selected>City</option>
                         <option value="1">Amsterdam</option>
                         <option value="2">Andorra la Vella</option>
@@ -188,9 +188,8 @@
             </div>
             <div class="row">
                 <div class="col mt-3">
-                    <a href="/payment" class="btn btn-success">Procceed to payment</a>
+                    <button type="submit" class="btn btn-success">Procceed to payment</button>
 
-<!--                    <button type="button" class="btn btn-success">Proceed to credit card payment</button>-->
                 </div>
             </div>
         </div>

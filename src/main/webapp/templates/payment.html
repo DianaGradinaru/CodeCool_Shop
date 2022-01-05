@@ -44,9 +44,47 @@
 <div class="container mt-3 mb-5">
     <h1 class="text-center fs-1 fw-bold">Payment</h1>
 
-    <form class="row g-3">
+    <form class="row bg-body" action="/">
 
+        <div class="col-sm-7 border-line pb-3">
+            <div class="form-group">
+                <label class="text-muted text-sm my-2">Name on the card</label>
+                <input type="text" name="name" placeholder="Name" size="15"  class="form-control" required>
+            </div>
+            <div class="form-group">
+                <p class="text-muted text-sm my-2">Card Number</p>
+                <div class="row px-3">
+                    <input type="text" name="card-num" placeholder="0000 0000 0000 0000" size="18" id="cr_no" minlength="19" maxlength="19" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="text-muted text-sm my-2">Expiry date</p>
+                <input type="text" name="exp" placeholder="MM/YY" size="6" id="exp" minlength="5" maxlength="5" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <p class="text-muted text-sm my-2">CVV/CVC</p>
+                <input type="password" name="cvv" placeholder="000" size="1" minlength="3" maxlength="3" class="form-control" required>
+            </div>
+            <div class="form-group mb-0">
+                <div class="custom-control custom-checkbox custom-control-inline my-3">
+                    <input id="chk1" type="checkbox" name="chk" class="custom-control-input" checked>
+                    <label for="chk1" class="custom-control-label text-muted text-sm">save my card for future payment</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 text-sm-center justify-content-center pt-4 pb-4">
+            <small class="text-md text-muted">Payment amount</small>
+            <div class="row px-3 justify-content-sm-center">
+                <h3 class="">
+                    <strong class="text-muted ms-auto" th:text="${#numbers.formatDecimal(session.cart.getTotal() + 10 ,0, 'COMMA', 2, 'POINT')} + ' USD'"></strong>
+                </h3>
+            </div>
+            <button type="submit" class="btn btn-lg btn-success text-center mt-4">PAY</button>
+        </div>
     </form>
+
+</div>
+
 
 </div>
 
